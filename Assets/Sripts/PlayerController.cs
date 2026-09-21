@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private Transform _groundSensor;
 
+    private Animator _animator;
+
     
 
 
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour
         _rbody = GetComponent<Rigidbody2D>();
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
+        _animator = GetComponent<Animator>();
     }
 
     
@@ -44,16 +47,23 @@ public class PlayerController : MonoBehaviour
         if (_moveInput.x < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            _animator.SetBool("IsRunning", true);
+        }
+        else if (_moveInput.x > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            _animator.SetBool("IsRunning", true);
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+         _animator.SetBool("IsRunning", false);   
         }
 
         if (_jumpAction.WasPressedThisFrame() && IsGrounded())
         {
-            Jump(); 
+            Jump();
         }
+        _animator.SetBool("IsJumping", !IsGrounded());
     }
     void FixedUpdate()
     {
