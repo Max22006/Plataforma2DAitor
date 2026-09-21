@@ -22,6 +22,13 @@ public class PlayerController : MonoBehaviour
 
     private Animator _animator;
 
+    private InputAction _attackAction;
+
+    [SerializeField] private int _attackDamage = 10;
+    [SerializeField] private Transform _attackHitBox;
+    [SerializeField] private float _hitBoxRadius = 1f;
+
+
     
 
 
@@ -30,6 +37,7 @@ public class PlayerController : MonoBehaviour
         _rbody = GetComponent<Rigidbody2D>();
         _moveAction = InputSystem.actions["Move"];
         _jumpAction = InputSystem.actions["Jump"];
+        _attackAction = InputSystem.actions["Attack"];
         _animator = GetComponent<Animator>();
     }
 
@@ -64,6 +72,11 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         _animator.SetBool("IsJumping", !IsGrounded());
+
+         if (_attackAction.WasPressedThisFrame() && IsGrounded())
+        {
+            Attack();
+        }
     }
     void FixedUpdate()
     {
@@ -90,5 +103,25 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_groundSensor.position, _sensorSize);
+
+        Gizmos.color = Color.pink;
+        Gizmos.DrawWireSphere(_attackHitBox.position, _hitBoxRadius);
+    }
+    void Attack()
+    {
+        _animator.SetTrigger("IsAttacking");
+
+        Collider2D[] colliders2D = Physics2D.OverlapCircleAll(_attackHitBox.position, _hitBoxRadius);
+
+        foreach (Collider2D enemy in colliders2D)
+        {
+            if (enemy.gameObject.layer == 7)
+            {
+                Mimik enemyScript = enemy.GetComponent<Mimik>();
+
+                enemyScript.TakeDamage(_attackDamage);
+            }
+        }
+
     }
 }
