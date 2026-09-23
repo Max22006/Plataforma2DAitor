@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
+    void Start ()
+    {
+         AudioManager.Instance.StartBGM();
+    }
     public void AddCoins()
     {
         _coins += 1;
@@ -28,11 +32,14 @@ public class GameManager : MonoBehaviour
         if (_isPaused)
         {
             _isPaused = false;
+            AudioManager.Instance.StartBGM();
             Time.timeScale = 1;
+            
         }
         else
         {
             _isPaused = true;
+            AudioManager.Instance.PauseBGM();
             Time.timeScale = 0;
         }
     }
