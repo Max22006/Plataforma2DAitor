@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _attackHitBox;
     [SerializeField] private float _hitBoxRadius = 1f;
 
+    private InputAction _pauseAction;
+
 
     
 
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         _jumpAction = InputSystem.actions["Jump"];
         _attackAction = InputSystem.actions["Attack"];
         _animator = GetComponent<Animator>();
+        _pauseAction = InputSystem.actions["Pause"];
     }
 
     
@@ -50,6 +53,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (_pauseAction.WasPressedThisFrame())
+        {
+            GameManager.Instance.Pause();
+        }
+
+        if (GameManager.Instance.IsPaused())
+        {
+           return; 
+        }
         _moveInput = _moveAction.ReadValue<Vector2>();
 
         if (_moveInput.x < 0)
@@ -77,6 +89,7 @@ public class PlayerController : MonoBehaviour
         {
             Attack();
         }
+        
     }
     void FixedUpdate()
     {
