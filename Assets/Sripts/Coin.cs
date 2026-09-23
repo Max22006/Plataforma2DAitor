@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    void Start()
+    [SerializeField] private AudioClip _coinSFX;
+    private AudioSource _audioSource;
+    void Awake()
     {
-    
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -16,6 +18,7 @@ public class Coin : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.AddCoins();
+            _audioSource.PlayOneShot(_coinSFX);
             Destroy(gameObject);
         }
     }

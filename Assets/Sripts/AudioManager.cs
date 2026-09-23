@@ -6,6 +6,9 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _soundtrack;
+    
+    
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -29,4 +32,5 @@ public class AudioManager : MonoBehaviour
     {
         _audioSource.Pause();
     }
+   
 }

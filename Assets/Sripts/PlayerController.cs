@@ -30,6 +30,11 @@ public class PlayerController : MonoBehaviour
 
     private InputAction _pauseAction;
 
+    [SerializeField] private AudioClip _attackSFX;
+    [SerializeField] private AudioClip _jumpSFX;
+    [SerializeField] private AudioClip _dieSFX;
+    private AudioSource _audioSource;
+
 
     
 
@@ -42,6 +47,7 @@ public class PlayerController : MonoBehaviour
         _attackAction = InputSystem.actions["Attack"];
         _animator = GetComponent<Animator>();
         _pauseAction = InputSystem.actions["Pause"];
+        _audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -98,6 +104,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         _rbody.AddForce(Vector2.up * Mathf.Sqrt(_jumpHeight * -2 * Physics2D.gravity.y), ForceMode2D.Impulse);
+        _audioSource.PlayOneShot(_jumpSFX);
+        
     }
     bool IsGrounded()
     {
@@ -123,6 +131,8 @@ public class PlayerController : MonoBehaviour
     void Attack()
     {
         _animator.SetTrigger("IsAttacking");
+
+        _audioSource.PlayOneShot(_attackSFX);
 
         Collider2D[] colliders2D = Physics2D.OverlapCircleAll(_attackHitBox.position, _hitBoxRadius);
 
