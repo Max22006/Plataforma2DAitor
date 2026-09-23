@@ -1,31 +1,32 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Heart : MonoBehaviour
 {
-    [SerializeField] private AudioClip _coinSFX;
+    [SerializeField] private AudioClip _heartSFX;
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
-    private CircleCollider2D _circleCollider2D;
+    private BoxCollider2D _boxCollider2D;
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _circleCollider2D = GetComponent<CircleCollider2D>();
+        _boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    void PlaySFX()
+    // Update is called once per frame
+    void Update()
     {
         
     }
-    void OnTriggerEnter2D (Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.AddCoins();
             _spriteRenderer.enabled = false;
-            _circleCollider2D.enabled = false;
-            _audioSource.PlayOneShot(_coinSFX);
+            _boxCollider2D.enabled = false;
+            _audioSource.PlayOneShot(_heartSFX);
             Destroy(gameObject, 1f);
         }
     }
+
 }

@@ -5,8 +5,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] private int _coins;
-
     private bool _isPaused = false;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _pauseSFX;
    
     void Awake()
     {
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             _isPaused = true;
             AudioManager.Instance.PauseBGM();
+            //_audioSource.PlayOneShot(_pauseSFX);
             Time.timeScale = 0;
         }
     }

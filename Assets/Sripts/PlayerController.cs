@@ -5,6 +5,8 @@ public class PlayerController : MonoBehaviour
 {
     //[SerializeField] Es para hacelo "publico" sin serlo, para poder modificarlo desde el inspector en unity.
     [SerializeField] private int _maxHealth = 10; //int para guardar la vida maxima
+    [SerializeField] private int _health;
+
     
 
     private Rigidbody2D _rbody;
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
-        
+       _health = _maxHealth;
     }
 
 
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         _rbody.AddForce(Vector2.up * Mathf.Sqrt(_jumpHeight * -2 * Physics2D.gravity.y), ForceMode2D.Impulse);
-        _audioSource.PlayOneShot(_jumpSFX);
+        PlayerSFX(_jumpSFX);
         
     }
     bool IsGrounded()
@@ -132,7 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("IsAttacking");
 
-        _audioSource.PlayOneShot(_attackSFX);
+        PlayerSFX(_attackSFX);
 
         Collider2D[] colliders2D = Physics2D.OverlapCircleAll(_attackHitBox.position, _hitBoxRadius);
 
@@ -146,5 +148,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+    void PlayerSFX(AudioClip clip)
+    {
+        _audioSource.PlayOneShot(clip);
+    }
+    void Heal(int heal)
+    {
+        if (_health <= _maxHealth)
+        {
+            _health += heal;
+        }
+        if (_health >= _maxHealth)
+        {
+            _health = 10;
+        }
+        
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            Heal(3);
+        }
     }
 }
