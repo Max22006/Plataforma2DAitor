@@ -37,10 +37,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _dieSFX;
     private AudioSource _audioSource;
 
-
-    
-
-
     void Awake()
     {
         _rbody = GetComponent<Rigidbody2D>();
@@ -51,14 +47,11 @@ public class PlayerController : MonoBehaviour
         _pauseAction = InputSystem.actions["Pause"];
         _audioSource = GetComponent<AudioSource>();
     }
-
-    
     void Start()
     {
        _health = _maxHealth;
     }
-
-
+    
     void Update()
     {
         if (_pauseAction.WasPressedThisFrame())
@@ -153,23 +146,15 @@ public class PlayerController : MonoBehaviour
     {
         _audioSource.PlayOneShot(clip);
     }
-    void Heal(int heal)
+    public void Heal(int heal)
     {
-        if (_health <= _maxHealth)
-        {
+        
             _health += heal;
-        }
+        
         if (_health >= _maxHealth)
         {
-            _health = 10;
+            _health = _maxHealth;
         }
         
-    }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Heart"))
-        {
-            Heal(3);
-        }
     }
 }

@@ -6,6 +6,7 @@ public class Heart : MonoBehaviour
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider2D;
+    private int _healthAmount = 3;
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -22,6 +23,8 @@ public class Heart : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            PlayerController _playerScript = collision.GetComponent<PlayerController>();
+            _playerScript.Heal(_healthAmount);
             _spriteRenderer.enabled = false;
             _boxCollider2D.enabled = false;
             _audioSource.PlayOneShot(_heartSFX);
