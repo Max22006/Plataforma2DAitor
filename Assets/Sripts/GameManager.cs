@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
         {
             _isPaused = true;
             AudioManager.Instance.PauseBGM();
-            //_audioSource.PlayOneShot(_pauseSFX);
             Time.timeScale = 0;
         }
+        CanvasManager.Instance.ActivateCanvas(CanvasManager.Instance._pauseCanvas, CanvasManager.Instance._returnButton);
     }
     public bool IsPaused()
     {

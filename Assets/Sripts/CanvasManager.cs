@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance;
-    [SerializeField] private GameObject _pauseCanvas;
+    public GameObject _pauseCanvas;
+    public Button _returnButton;
+    public GameObject gameOverCanvas;
+    public Button retryButton;
+
     
     void Awake()
     {
@@ -17,19 +22,19 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
-    public void ActivateCanvas()
+    public void ActivateCanvas(GameObject canvas, Button selectedButton)
     {
-        _pauseCanvas.SetActive(true);
-
-
-    if (_pauseCanvas.activeInHierarchy)
-    {
-        _pauseCanvas.SetActive(false);
-    }
-    else
-    {
-        _pauseCanvas.SetActive(true);
-    }
+        
+        if (canvas.activeInHierarchy)
+        {
+            _pauseCanvas.SetActive(false);
+            
+        }
+        else
+        {
+            canvas.SetActive(true);
+            selectedButton.Select();
+        }
         
     }
 }
