@@ -5,7 +5,7 @@ public class CanvasManager : MonoBehaviour
 {
     public static CanvasManager Instance;
     public GameObject _pauseCanvas;
-    public Button _returnButton;
+    public Button _returnButton;    
     public GameObject gameOverCanvas;
     public Button retryButton;
 
