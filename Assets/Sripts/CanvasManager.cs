@@ -37,9 +37,4 @@ public class CanvasManager : MonoBehaviour
         }
         
     }
-
-    public void ChangeScene(string sceneName)
-    {
-        SceneLoader.Instance.ChangeScene(sceneName);
-    }
 }

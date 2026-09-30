@@ -20,8 +20,6 @@ public class SceneLoader : MonoBehaviour
         {
             Instance = this;
         }
-
-        DontDestroyOnLoad(gameObject);
     }
     
     /*public void ChangeScene (string sceneName)
