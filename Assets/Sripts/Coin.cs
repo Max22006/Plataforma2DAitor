@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
     private CircleCollider2D _circleCollider2D;
+    
     void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -13,10 +14,6 @@ public class Coin : MonoBehaviour
         _circleCollider2D = GetComponent<CircleCollider2D>();
     }
 
-    void PlaySFX()
-    {
-        
-    }
     void OnTriggerEnter2D (Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

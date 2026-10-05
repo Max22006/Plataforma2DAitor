@@ -1,13 +1,21 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] private int _coins;
+    [SerializeField] private int _stars;
+
     private bool _isPaused = false;
     private AudioSource _audioSource;
     [SerializeField] private AudioClip _pauseSFX;
+
+    [SerializeField] private Text coinText;
+    [SerializeField] private Text starText;
+
+
    
     void Awake()
     {
@@ -27,6 +35,12 @@ public class GameManager : MonoBehaviour
     public void AddCoins()
     {
         _coins += 1;
+        coinText.text = _coins.ToString();
+    }
+    public void AddStars()
+    {
+        _stars += 1;
+        starText.text = _stars.ToString();
     }
     public void Pause()
     {
