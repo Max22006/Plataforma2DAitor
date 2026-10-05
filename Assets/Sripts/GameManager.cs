@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text coinText;
     [SerializeField] private Text starText;
 
-
-   
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,6 +43,11 @@ public class GameManager : MonoBehaviour
     {
         _stars += 1;
         starText.text = _stars.ToString();
+        
+        if(_stars >= 12)
+        {
+            CanvasManager.Instance.ActivateCanvas(CanvasManager.Instance._pauseCanvas, CanvasManager.Instance._returnButton);
+        }
     }
     public void Pause()
     {

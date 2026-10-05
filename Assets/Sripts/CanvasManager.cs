@@ -6,7 +6,10 @@ public class CanvasManager : MonoBehaviour
     public static CanvasManager Instance;
     public GameObject _pauseCanvas;
     public Button _returnButton;    
-    public GameObject gameOverCanvas;
+    
+    [SerializeField] private GameObject victoryCanvas;
+    [SerializeField] private GameObject gameOverCanvas;
+    
     public Button retryButton;
 
     
@@ -27,7 +30,7 @@ public class CanvasManager : MonoBehaviour
         
         if (canvas.activeInHierarchy)
         {
-            _pauseCanvas.SetActive(false);
+            canvas.SetActive(false);
             
         }
         else

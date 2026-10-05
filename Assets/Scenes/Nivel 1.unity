@@ -976,7 +976,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CanvasManager
   _pauseCanvas: {fileID: 1960766725}
   _returnButton: {fileID: 952854661}
-  gameOverCanvas: {fileID: 0}
+  victoryCanvas: {fileID: 2019379336}
+  gameOverCanvas: {fileID: 1736812019}
   retryButton: {fileID: 0}
 --- !u!4 &234719172
 Transform:
