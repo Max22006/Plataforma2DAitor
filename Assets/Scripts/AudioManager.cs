@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     private AudioSource _audioSource;
-    [SerializeField] private AudioClip _soundtrack;
+    public AudioClip soundtrack;
     
     
 
@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
 
     public void StartBGM ()
     {
-        _audioSource.clip = _soundtrack;
+        _audioSource.clip = soundtrack;
         _audioSource.Play();
     }
     public void PauseBGM ()

@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -7,8 +10,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject _pauseCanvas;
     public Button _returnButton;    
     
-    [SerializeField] private GameObject victoryCanvas;
-    [SerializeField] private GameObject gameOverCanvas;
+    public GameObject victoryCanvas;
+    public GameObject gameOverCanvas;
     
     public Button retryButton;
 
@@ -44,5 +47,16 @@ public class CanvasManager : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SceneLoader.Instance.ChangeScene(sceneName);
+    }
+    
+    public IEnumerator DelayVictory()
+    {
+        yield return new WaitForSeconds(1.5f);
+        victoryCanvas.SetActive(true);
+    }
+    public IEnumerator DelayGameOver()
+    {
+        yield return new WaitForSeconds(1.5f);
+        gameOverCanvas.SetActive(true);
     }
 }

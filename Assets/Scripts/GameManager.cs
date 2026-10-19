@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         
         if(_stars >= 12)
         {
-            CanvasManager.Instance.ActivateCanvas(CanvasManager.Instance._pauseCanvas, CanvasManager.Instance._returnButton);
+            CanvasManager.Instance.ActivateCanvas(CanvasManager.Instance.victoryCanvas, CanvasManager.Instance._returnButton);
         }
     }
     public void Pause()

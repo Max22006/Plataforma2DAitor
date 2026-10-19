@@ -4,6 +4,7 @@ public class Mimik : MonoBehaviour
 {
     [SerializeField] private int _maxHealth = 30;
     [SerializeField] private int _health;
+    
     void Awake()
     {
         
@@ -31,4 +32,5 @@ public class Mimik : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    
 }
